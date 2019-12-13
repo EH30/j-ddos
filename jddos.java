@@ -38,8 +38,8 @@ public class httpconnection{
                 th.start();
             }
         } catch (java.lang.ArrayIndexOutOfBoundsException e) {
-            System.out.println("Usage: java httpconnection https://www.yourtarget.com 100");
-            System.out.println("                                  [yourtarget]     [your connections]");
+            System.out.println("Usage: java jddos https://www.yourtarget.com 100");
+            System.out.println("                          [your target]    [your connections]");
 
         }
             
